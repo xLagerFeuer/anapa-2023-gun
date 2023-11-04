@@ -1,0 +1,12 @@
+FROM pytorch/pytorch:2.0.1-cuda11.7-cudnn8-runtime
+USER root
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    ffmpeg libsm6 libxext6  -y
+
+COPY requirements.txt /tmp/requirements.txt
+RUN pip --no-cache-dir install -r /tmp/requirements.txt
+
+WORKDIR /mnt/
+COPY . /app/
+CMD ["python3", "/app/main.py"]

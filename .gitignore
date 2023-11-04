@@ -1,2 +1,2 @@
-ml/train/
-ml/test/
+ml/data/*
+!.gitkeep
