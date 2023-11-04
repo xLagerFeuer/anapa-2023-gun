@@ -1,3 +1,4 @@
+docs/
 ml/data/*
 !.gitkeep
 .idea\
