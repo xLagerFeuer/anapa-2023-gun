@@ -4,3 +4,5 @@ Project for detecting weapons and other suspicious objects through network camer
 # Research
 
 # Run
+
+## Docker
