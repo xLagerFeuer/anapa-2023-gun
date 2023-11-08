@@ -1,6 +1,6 @@
 # ML
-from inferences.full_grad_pipeline import grad_pipeline_init, grad_pipeline_consume
-from inferences.full_inference_pipeline import inference_pipeline_init, inference_pipeline_consume
+from inferences.grad_pipeline import GradPipeline
+from inferences.inference_pipeline import InferencePipeline
 # Console run
 import argparse
 # FS
@@ -26,6 +26,8 @@ ALL_RUNMODES = ["weights_init", "async_mode"]
 args = None
 app = FastAPI()
 
+pipelines = {}
+
 # FastAPI
 @app.post("/process_image")
 async def process_image(image: bytes, mode: str):
@@ -39,9 +41,9 @@ async def process_image(image: bytes, mode: str):
     image_data = base64.b64decode(image)
     match mode:
         case "grad":
-            grad_pipeline_consume(image_data)
+            pipelines["grad"](image_data)
         case "inference":
-            inference_pipeline_consume(image_data)
+            pipelines["inference"](image_data)
 
 # CLI init
 def make_parser():
@@ -64,9 +66,10 @@ def main(args):
         # case "weights_init":
         #     inference_grad()
         case "async_mode":
-            inference_pipeline_init(model_folder, data_folder)
-            grad_pipeline_init(model_folder, data_folder)
+            pipelines["grad"] = GradPipeline(model_folder, data_folder)
+            pipelines["inference"] = InferencePipeline(model_folder, data_folder)
             uvicorn.run("main:app", port=5000, log_level="info")
+
 
 if __name__ == "__main__":
     args = make_parser().parse_args()
