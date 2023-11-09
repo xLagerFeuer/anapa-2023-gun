@@ -1,24 +1,18 @@
-import {ButtonHTMLAttributes, DetailedHTMLProps, ReactNode} from "react";
+// EVENT LOG
 
 
-// BUTTON
-export enum ButtonTargetEnum {
-    PRIMARY = "primary",
-    SECONDARY = "secondary"
+export enum EventLogTypeEnum {
+    STREAM = 'stream',
+    VIDEO = "video"
+}
+export interface IEventLogProps {
+    label: string
+    type: EventLogTypeEnum
 }
 
-export enum ButtonSizeEnum {
-    SM = "sm",
-    MD = "md",
-    LG = "lg"
+// SORTING TYPES
+export enum SortingTypesEnum {
+    GRIDMAX = '3',
+    GRIDLIST = '1',
+    GRIDHALF = '2',
 }
-
-export interface IButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
-    target: ButtonTargetEnum
-    border: boolean
-    size: ButtonSizeEnum
-    disabled: boolean
-    children: ReactNode
-}
-
-

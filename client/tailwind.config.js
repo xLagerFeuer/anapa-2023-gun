@@ -1,4 +1,5 @@
 import colors from "tailwindcss/colors.js";
+import svgr from "vite-plugin-svgr"
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -10,7 +11,8 @@ export default {
     theme: {
         extend: {
             colors: {
-                "primary": {light: colors.blue[500], dark: colors.blue[700], base: colors.blue[600]}
+                "primary": {light: "#9CA3AF", dark: "#374151", base: "#D1D5DB"},
+                "bg": {primary: "#323232", navbar: "#1C1D17", tab: "#3C3C42"}
             }
         },
     },
