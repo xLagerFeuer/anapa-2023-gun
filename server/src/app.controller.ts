@@ -1,13 +1,17 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
-import {SocketIoGateway} from "../libs/common/src/gateways/socket-io.gateway";
+import {Body, Controller, Get, Post} from '@nestjs/common';
+import {AppService} from './app.service';
+import {EventService} from "./events/event.service";
+import {EventsDto} from "./events/events.dto";
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService,
-              private readonly socketIoGateway: SocketIoGateway) {}
+    constructor(
+        private readonly appService: AppService,
+        private readonly eventService: EventService) {
+    }
 
-  @Get()
-  getHello() {
-  }
+    @Post("test")
+    getHello(@Body("event") event: EventsDto) {
+        this.eventService.createEvent(event)
+    }
 }
