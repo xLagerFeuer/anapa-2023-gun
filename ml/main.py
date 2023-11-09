@@ -27,6 +27,9 @@ DEFAULT_INFERENCEMODE = "full"
 ALL_RUNMODES = ["weights_init", "async_mode"]
 
 MONGODB_SOCKET = "mongodb://127.0.0.1:27017"
+# TODO:
+MONGODB_LOGIN = ""
+MONGODB_PASSWORD = ""
 
 args = None
 app = FastAPI()
