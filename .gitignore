@@ -1,2 +1,6 @@
-ml/train/
-ml/test/
+ml/data/*
+!.gitkeep
+.idea\
+**/.idea
+*/.DS_Store
+.DS_Store
