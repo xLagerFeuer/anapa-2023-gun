@@ -4,17 +4,19 @@ Project for detecting weapons and other suspicious objects through network camer
 ## Team members
 - Alexandr Zhdanov, 4 course, Team Leader, ML
 - Artem Darius-Veber, 2 course, ML
-- Anton
-- Anastasiya
-- Daler
+- Anton Zhuravlev
+- Anastasiya Sergeeva
+- Daler Homidov
 
 # Using datasets
-
+<!-- TODO: -->
 
 # Weights, link
+<!-- TODO: -->
 
 # MVP Project structure
 ## Architecture
+
 
 ## ML pipeline
 
