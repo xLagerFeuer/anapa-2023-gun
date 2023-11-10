@@ -8,9 +8,11 @@ import logging
 import os
 from pathlib import Path
 # API
-import uvicorn
+import asyncio
+import requests
 from fastapi import FastAPI
-from mongodb_client.mongo_client import MongoSingleton
+from ml.kafka_client import RTSPStreamSubscriber
+from ml.mongo_client import MongoSingleton
 # Encoding
 import base64
 
@@ -23,13 +25,18 @@ DATA_PATH = WORK_DIR / "ml" / "data"
 MODEL_PATH = WORK_DIR / "ml" / "inferences" / "models"
 CACHE_PATH = WORK_DIR / "ml" / "inferences" / "cache"
 
-DEFAULT_INFERENCEMODE = "full"
+DEFAULT_INFERENCEMODE = "async_mode"
 ALL_RUNMODES = ["weights_init", "async_mode"]
 
 MONGODB_SOCKET = "mongodb://127.0.0.1:27017"
-# TODO:
+# TODO: mongodb login pwd
 MONGODB_LOGIN = ""
 MONGODB_PASSWORD = ""
+
+KAFKA_SOCKET = "127.0.0.1:9092"
+KAFKA_TOPIC = "test"
+
+WEB_SOCKET = "http://localhost:4000"
 
 args = None
 app = FastAPI()
@@ -38,20 +45,30 @@ pipelines = {}
 
 # FastAPI
 @app.post("/process_image")
-async def process_image(image: bytes, mode: str):
+async def fastapi_process_image(image: bytes, mode: str="inference"):
     '''
     {
     "image": "<base64-encoded-image>",
     "mode": "<processing-mode>" ["grad", "inference"]
     }
     '''
-    # TODO: check valid code
-    image_data = base64.b64decode(image)
+    decoded = decode_image(image)
+    return process_image(decoded, mode)
+
+
+def decode_image(image: bytes):
+    return base64.b64decode(image)
+
+
+def process_image(image, mode: str):
     match mode:
         case "grad":
-            pipelines["grad"](image_data)
+            # TODO: after MVP
+            pipelines["grad"].consume(image)
         case "inference":
-            pipelines["inference"](image_data)
+            detected, result = pipelines["inference"].consume(image)
+            if detected:
+                responce = requests.post()
 
 
 # CLI init
@@ -64,6 +81,8 @@ def make_parser():
     parser.add_argument('--data-folder', type=str, default=str(DATA_PATH),
                         help='source'),
     parser.add_argument('--db-socket', type=str, default=str(MONGODB_SOCKET),
+                        help='source'),
+    parser.add_argument('--kafka-socket', type=str, default=str(KAFKA_SOCKET),
                         help='source')
 
 
@@ -75,11 +94,15 @@ def main(args):
         case "async_mode":
             pipelines["grad"] = GradPipeline(model_folder, data_folder)
             pipelines["inference"] = InferencePipeline(model_folder, data_folder)
-            uvicorn.run("main:app", port=5000, log_level="info")
+            loop = asyncio.get_event_loop()
+            loop.create_task(mongoclient.watch_changes("ml_awaited"))
+            loop.create_task(kafkaclient.display_stream())
+            loop.run_forever()
 
 
 if __name__ == "__main__":
     args = make_parser().parse_args()
     model_folder, data_folder = args.model_folder, args.data_folder
-    mongoclient = MongoSingleton(args.db_socket, "ml", "images")
+    mongoclient = MongoSingleton(args.db_socket, "ml", ["image_pose", "image_hand_with_item"])
+    kafkaclient = RTSPStreamSubscriber(KAFKA_TOPIC, KAFKA_SOCKET)
     main(args)
