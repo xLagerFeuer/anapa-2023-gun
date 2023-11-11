@@ -1,4 +1,5 @@
 from kafka import KafkaConsumer
+from main import process_image
 import cv2
 import numpy as np
 
@@ -11,14 +12,15 @@ class RTSPStreamSubscriber:
         self.rtsp_stream_url = "rtsp_stream_url"
         self.cap = cv2.VideoCapture(self.rtsp_stream_url)
 
-    def processing(self, frame):
-        cv2.imshow('RTSP Stream', frame)
 
-    def display_stream(self):
+    def processing(self, frame):
+        process_image(frame, "inference")
+
+
+    async def display_stream(self):
         try:
             for message in self.consumer:
                 frame = cv2.imdecode(message.value, cv2.IMREAD_COLOR) # Decoder for JPEG
-
                 self.processing(frame)
 
         except NameError as error:
@@ -27,7 +29,7 @@ class RTSPStreamSubscriber:
 
         finally:
             self.cap.release()
-            cv2.destroyAllWindows()
+            # cv2.destroyAllWindows()
 
 if __name__ == "__main__":
     topic = "test"

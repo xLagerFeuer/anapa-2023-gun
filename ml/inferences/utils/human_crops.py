@@ -8,3 +8,8 @@ def people_selector(image, persons_bbox_and_poses):
         cropped_images.append(cropped_image)
 
     return person_bbox_coords, cropped_images
+
+
+def image_crop_bbox(image, bbox):
+    x, y, w, h = bbox
+    return image[y:y+h, x:x+w]
