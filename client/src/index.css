@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+    min-height: 100vh;
+}
+#root {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.canvas {
+    margin: 0 auto;
+    width: 80%;
+    height: 60%;
+}
+.canvas canvas {
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
