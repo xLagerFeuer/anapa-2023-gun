@@ -1,8 +1,8 @@
 import {Modal, TextInput} from "flowbite-react";
-import {FormEvent, useState} from "react";
+import {FormEvent, useEffect, useState} from "react";
 import {useSendRtspLinksMutation} from "@/store/services/streamApi.ts";
 import {useAppDispatch} from "@/store";
-import {setStreams, setSuccess} from "@/store/features/streamSlice.ts";
+import {setPort, setStreams, setSuccess} from "@/store/features/streamSlice.ts";
 
 const StreamModal = ({isOpen, setIsOpen}: { isOpen: boolean, setIsOpen: (b: boolean) => void }) => {
     const [inputValues, setInputValues] = useState({
@@ -10,7 +10,7 @@ const StreamModal = ({isOpen, setIsOpen}: { isOpen: boolean, setIsOpen: (b: bool
         // secondUrl: "",
         // thirdUrl: "",
     });
-    const [mutate] = useSendRtspLinksMutation()
+    const [mutate, {data}] = useSendRtspLinksMutation()
     const dispatch = useAppDispatch()
     const handleChange = (e: FormEvent<HTMLInputElement>) => {
         const {name, value} = e.currentTarget;
@@ -19,6 +19,11 @@ const StreamModal = ({isOpen, setIsOpen}: { isOpen: boolean, setIsOpen: (b: bool
             [name]: value,
         });
     };
+    useEffect(() => {
+        if (data) {
+            dispatch(setPort({port: data}))
+        }
+    }, [data])
     const handleOpenModal = () => {
         setIsOpen(!isOpen)
     }
