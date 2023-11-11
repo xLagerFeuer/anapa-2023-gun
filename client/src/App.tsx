@@ -11,17 +11,17 @@ function App() {
         staleTime: 10000, // Set the staleTime to 10 seconds
     });
 
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            // Trigger a background re-fetch every 10 seconds
-            refetch();
-        }, 10000);
-
-        // Clear the interval when the component is unmounted
-        return () => {
-            clearInterval(intervalId);
-        };
-    }, [refetch]);
+    // useEffect(() => {
+    //     const intervalId = setInterval(() => {
+    //         // Trigger a background re-fetch every 10 seconds
+    //         refetch();
+    //     }, 10000);
+    //
+    //     // Clear the interval when the component is unmounted
+    //     return () => {
+    //         clearInterval(intervalId);
+    //     };
+    // }, [refetch]);
 
 
     useEffect(() => {

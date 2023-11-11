@@ -1,15 +1,17 @@
-import {Button, Modal, TextInput} from "flowbite-react";
+import {Modal, TextInput} from "flowbite-react";
 import {FormEvent, useState} from "react";
 import {useSendRtspLinksMutation} from "@/store/services/streamApi.ts";
+import {useAppDispatch} from "@/store";
+import {setStreams, setSuccess} from "@/store/features/streamSlice.ts";
 
 const StreamModal = ({isOpen, setIsOpen}: { isOpen: boolean, setIsOpen: (b: boolean) => void }) => {
     const [inputValues, setInputValues] = useState({
-        input1: "",
-        input2: "",
-        input3: "",
+        firstUrl: "",
+        // secondUrl: "",
+        // thirdUrl: "",
     });
     const [mutate] = useSendRtspLinksMutation()
-
+    const dispatch = useAppDispatch()
     const handleChange = (e: FormEvent<HTMLInputElement>) => {
         const {name, value} = e.currentTarget;
         setInputValues({
@@ -22,7 +24,11 @@ const StreamModal = ({isOpen, setIsOpen}: { isOpen: boolean, setIsOpen: (b: bool
     }
     const handleForm = (e: FormEvent) => {
         e.preventDefault()
-        mutate(Object.values(inputValues))
+        mutate(inputValues)
+        dispatch(setStreams(inputValues))
+        setInterval(() => {
+            dispatch(setSuccess())
+        }, 2000)
     }
     return (
         <Modal dismissible show={isOpen} onClose={handleOpenModal}>
@@ -32,27 +38,26 @@ const StreamModal = ({isOpen, setIsOpen}: { isOpen: boolean, setIsOpen: (b: bool
                     <TextInput
 
                         type="text"
-                        name="input1"
-                        value={inputValues.input1}
+                        name="firstUrl"
+                        value={inputValues.firstUrl}
                         onChange={handleChange}
                         placeholder="rtsp://"
                     />
-                    <TextInput
+                    {/*<TextInput*/}
+                    {/*    type="text"*/}
+                    {/*    name="secondUrl"*/}
+                    {/*    value={inputValues.secondUrl}*/}
+                    {/*    onChange={handleChange}*/}
+                    {/*    placeholder="rtsp://"*/}
+                    {/*/>*/}
+                    {/*<TextInput*/}
 
-                        type="text"
-                        name="input2"
-                        value={inputValues.input2}
-                        onChange={handleChange}
-                        placeholder="rtsp://"
-                    />
-                    <TextInput
-
-                        type="text"
-                        name="input3"
-                        value={inputValues.input3}
-                        onChange={handleChange}
-                        placeholder="rtsp://"
-                    />
+                    {/*    type="text"*/}
+                    {/*    name="thirdUrl"*/}
+                    {/*    value={inputValues.thirdUrl}*/}
+                    {/*    onChange={handleChange}*/}
+                    {/*    placeholder="rtsp://"*/}
+                    {/*/>*/}
                     <button
                         type="submit"
                         className="px-10 rounded-md transition duration-300 py-1.5 text-white bg-primary-dark

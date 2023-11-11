@@ -8,9 +8,9 @@ export const streamApi = createApi({
     endpoints: (build) => ({
         sendRtspLinks: build.mutation({
             query: (body) => ({
-                url: "/stream",
+                url: "/stream/new",
                 method: "POST",
-                body: JSON.stringify(body)
+                body: body
             })
         })
     })

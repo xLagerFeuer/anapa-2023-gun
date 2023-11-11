@@ -9,3 +9,7 @@ body {
     display: flex;
     flex-direction: column;
 }
+.canvas canvas {
+    width: 80%;
+    height: fit-content;
+}

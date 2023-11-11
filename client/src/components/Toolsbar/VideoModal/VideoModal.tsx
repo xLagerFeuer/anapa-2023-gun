@@ -3,48 +3,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { useUploadFileMutation } from "@/store/services/videoApi.ts";
 
 const VideoModal = ({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (b: boolean) => void }) => {
-    const [mutate, { data }] = useUploadFileMutation();
-    const [video, setVideo] = useState(null);
-    const [isSuccess, setIsSuccess] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-    const [showForm, setShowForm] = useState(true);
 
-    useEffect(() => {
-        if (isLoading) {
-            setTimeout(() => {
-                setIsSuccess(true);
-            }, 3000);
-        }
-    }, [isLoading]);
-
-    const handleFileChange = (event: FormEvent) => {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-        setVideo(formData.get("file"));
-        uploadFile(formData);
-    };
-
-    const handleOpenModal = () => {
-        setIsOpen(!isOpen);
-        // Reset the state when the modal is opened
-        setVideo(null);
-        setIsSuccess(false);
-        setIsLoading(false);
-        setShowForm(true);
-    };
-
-    const uploadFile = (data: FormData) => {
-        mutate(data);
-        setIsLoading(true);
-        setShowForm(false); // Hide the form while loading
-    };
-
-    const handleVideoEnd = () => {
-        // Callback when the video ends
-        setIsSuccess(false);
-        setIsLoading(false); // Reset loading state
-        setShowForm(true); // Show the form again
-    };
 
     return (
         <Modal dismissible show={isOpen} onClose={handleOpenModal}>

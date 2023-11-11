@@ -225,6 +225,11 @@
     "@babel/helper-validator-identifier" "^7.22.20"
     to-fast-properties "^2.0.0"
 
+"@cycjimmy/jsmpeg-player@^6.0.5":
+  version "6.0.5"
+  resolved "https://registry.yarnpkg.com/@cycjimmy/jsmpeg-player/-/jsmpeg-player-6.0.5.tgz#ab4a9a2eb915894eeba8ca6e39aca3e66d1609b6"
+  integrity sha512-bVNHQ7VN9ecKT5AI/6RC7zpW/y4ca68a9txeR5Wiin+jKpUn/7buMe+5NPub89A8NNeNnKPQfrD2+c76ch36mA==
+
 "@emotion/babel-plugin@^11.11.0":
   version "11.11.0"
   resolved "https://registry.yarnpkg.com/@emotion/babel-plugin/-/babel-plugin-11.11.0.tgz#c2d872b6a7767a9d176d007f5b31f7d504bb5d6c"

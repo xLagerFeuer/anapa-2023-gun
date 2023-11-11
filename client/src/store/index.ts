@@ -3,10 +3,10 @@ import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {videoApi} from "@/store/services/videoApi.ts";
 import {streamApi} from "@/store/services/streamApi.ts";
 import {eventsApi} from "@/store/services/eventsApi.ts";
-
+import streamSlice from "@/store/features/streamSlice.ts";
 const store = configureStore({
     reducer: {
-
+        stream: streamSlice,
         [eventsApi.reducerPath]: eventsApi.reducer,
         [videoApi.reducerPath]: videoApi.reducer,
         [streamApi.reducerPath]: streamApi.reducer,
