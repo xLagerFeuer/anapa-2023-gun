@@ -28,13 +28,14 @@ const VideoPage = () => {
 
     const handleFileChange = (event: FormEvent) => {
         event.preventDefault();
+        // @ts-ignore
         const formData = new FormData(event.target);
+        // @ts-ignore
         setVideo(formData.get("file"));
         uploadFile(formData);
     };
 
     const handleOpenModal = () => {
-        setIsOpen(!isOpen);
         // Reset the state when the modal is opened
         setVideo(null);
         setIsSuccess(false);
@@ -63,6 +64,7 @@ const VideoPage = () => {
                 <div className={cn(`flex items-center justify-center h-full p-8 gap-4  `)}>
                     {isSuccess && (
                         <div onClick={handleVideoEnd}>
+                            {/*@ts-ignore*/}
                             <video className="h-[80vh]" autoPlay={true} src={URL.createObjectURL(video)} onEnded={handleVideoEnd}></video>
                         </div>
                     )}

@@ -7,6 +7,7 @@ import {StreamModule} from './stream/stream.module';
 import {MongooseModule} from "@nestjs/mongoose";
 import {ConfigModule, ConfigService} from "@nestjs/config";
 import { EventModule } from './events/event.module';
+import { FileModule } from './file/file.module';
 
 @Module({
     imports: [
@@ -21,7 +22,8 @@ import { EventModule } from './events/event.module';
         GatewayModule,
         VideoModule,
         StreamModule,
-        EventModule
+        EventModule,
+        FileModule
     ],
     controllers: [AppController],
     providers: [AppService],

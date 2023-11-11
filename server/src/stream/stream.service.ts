@@ -5,13 +5,15 @@ import * as Stream from "node-rtsp-stream"
 @Injectable()
 export class StreamService {
     async setNewStreams(body: StreamDto) {
+        console.log(body)
         const optionsFirst = {
             name: 'first',
             streamUrl: body.firstUrl,
             wsPort: 3001,
             ffmpegOptions: {
                 '-stats': '',
-                '-r': 30
+                '-r': 30,
+                '-rtsp_transport': 'tcp'  // Добавьте эту опцию
             }
         };
         // Поскольку потоковое вещание сильно грузит бек было решено пока что остановится на 1 стриме
