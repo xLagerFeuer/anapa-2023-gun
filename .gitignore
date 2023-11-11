@@ -2,3 +2,9 @@ ml/train/
 ml/test/
 server/node_modules
 client/node_modules
+ml/data/*
+!.gitkeep
+.idea\
+**/.idea
+*/.DS_Store
+.DS_Store
