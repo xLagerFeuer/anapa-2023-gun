@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { StreamDto } from './stream.dto';
 import * as Stream from 'node-rtsp-stream';
 import * as net from 'net';
+import { log } from 'console';
 
 @Injectable()
 export class StreamService {
@@ -27,6 +28,7 @@ export class StreamService {
     }
 
     async setNewStreams(body: StreamDto): Promise<number | null> {
+        console.log(body)
         const startingPort = 3001;
         const maxAttempts = 100; // или любое другое разумное максимальное количество попыток
 

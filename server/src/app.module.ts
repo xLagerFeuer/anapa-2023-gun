@@ -15,7 +15,7 @@ import { FileModule } from './file/file.module';
         MongooseModule.forRootAsync({
             imports: [ConfigModule],
             useFactory: async (config: ConfigService) => ({
-                uri: `mongodb+srv://${config.get("DB_USERNAME")}:${config.get("DB_PASSWORD")}@cluster0.uxj10ek.mongodb.net/?retryWrites=true&w=majority`
+                uri: `mongodb+srv://daskis:VsCJOe858nG8ylHG@cluster0.uxj10ek.mongodb.net/?retryWrites=true&w=majority`
             }),
             inject: [ConfigService]
         }),

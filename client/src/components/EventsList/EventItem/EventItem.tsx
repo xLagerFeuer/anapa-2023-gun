@@ -12,7 +12,7 @@ const EventItem = (props: IEventItem) => {
         <>
             <div className="flex flex-row justify-between border p-2">
                 <div className="flex gap-2 ">
-                    <img className="max-h-20" src={`http://localhost:3000/assets/${props.image_str}`} alt="here img"/>
+                    <img className="max-h-20" src={`https://rs1.k-lab.su/assets/${props.image_str}`} alt="here img"/>
                     <p className="text-xl font-semibold">Двор 1</p>
                 </div>
                 <div className="flex flex-col items-end">

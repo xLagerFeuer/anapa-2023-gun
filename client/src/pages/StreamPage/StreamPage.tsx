@@ -9,11 +9,10 @@ import {useAppSelector} from "@/store";
 const StreamPage = () => {
     const [sortingType] = useState<SortingTypesEnum | string | null>(localStorage.getItem("sortingType"))
     const success = useAppSelector(state => state.stream.isSuccess)
-    const PORT = useAppSelector(state => state.stream.port)
     useEffect(() => {
         if (success) {
             //@ts-ig
-            var firstPlayer = new JSMpeg.VideoElement("#video-canvas-first", `ws://localhost:${PORT}/`, {
+            var firstPlayer = new JSMpeg.VideoElement("#video-canvas-first", `ws://rs2.k-lab.su`, {
                 autoplay: true,
             });
             // var secondPlayer = new JSMpeg.VideoElement("#video-canvas-second", "ws://localhost:3002/", {
@@ -36,11 +35,7 @@ const StreamPage = () => {
             {/*@ts-ignore*/}
             {/*<Toolsbar sortingType={sortingType} setSortingType={setSortingType} type={EventLogTypeEnum.STREAM}/>*/}
             <div className="flex flex-row h-[calc(100vh-56px)] items-end bg-white dark:bg-bg-primary flex-grow">
-                <div className={cn(`flex-1 h-full grid p-8 gap-4`, {
-                    ["grid-cols-3"]: sortingType === SortingTypesEnum.GRIDMAX,
-                    ["grid-cols-2"]: sortingType === SortingTypesEnum.GRIDHALF,
-                    ["grid-cols-1"]: sortingType === SortingTypesEnum.GRIDLIST,
-                })}>
+                <div className={cn(`flex-1 h-full grid p-8 gap-4`)}>
                     <div id="video-canvas-first" className="canvas"></div>
                     {/*<div id="video-canvas-second" style={{height: "480px", width: "640px"}}></div>*/}
                     {/*<div id="video-canvas-third" style={{height: "480px", width: "640px"}}></div>*/}

@@ -5,7 +5,7 @@ const EventLogItem = ({data} : {data: any}) => {
         <div className="flex flex-row p-2 gap-2">
             <img
                  className="w-24 h-16 border"
-                 src={`http://localhost:3000/assets/${data.image_str}`} alt="photo"
+                 src={`https://rs1.k-lab.su/assets/${data.image_str}`} alt="photo"
             />
             <div className="flex flex-col flex-1">
                 <div className="text-white flex justify-between">
