@@ -1,3 +1,4 @@
+<!-- TODO: перевод с русского на английский -->
 # Description
 Project for detecting weapons and other suspicious objects through network cameras.
 
@@ -7,6 +8,29 @@ Project for detecting weapons and other suspicious objects through network camer
 - Anton Zhuravlev, 3 course, Full-stack
 - Anastasiya Sergeeva, 4 course, Designer
 - Daler Homidov, 3 course, PM, Speaker
+
+# Research
+## Proposal, by abstract
+Our solution, вкратце:
+- YOLOv7 pose для детекции людей
+- Изображение каждого обнаруженного человека и его составных частей тела (по keypoint'ам) проходит в модель
+- Любое обнаружениие по бинарной классификации формирует стимул
+- Если сумма стимулов преодолевает порог, то вызываем оператора на проверку
+- Также в рамках отладки можно рассматривать любое обнаружение как спектр: от минимальных подозрений, до полной тревоги
+    - Это позволит проводить оператором диагностику модели или увеличивать строгость работы системы, к примеру, для обслуживания аэропортов
+
+![proposal](docs/assets/proposes_mvp.drawio.png)
+
+<!-- after MVP -->
+<!-- Для подробностей см. исследование по теме -->
+<!-- ![research](docs/research.pdf) -->
+
+# Project Features
+- [x] Обработка моделью RTSP поток
+- [x] Обработка моделью видео
+- [x] Просмотр видео и RTSP оператором
+- [x] Оценка угрозы оператором в категории "События"
+- [x] Отправление размеченных изображений оператором в датасет для дообучения
 
 # User-story
 ![user-story](docs/assets/user_story.drawio.png)
@@ -25,31 +49,27 @@ Project for detecting weapons and other suspicious objects through network camer
 ## ML Federative learning
 ![releaseml](docs/assets/release_ml_pipeline.drawio.png)
 
-# Research
-## Proposes, by abstract
-Our solution
-<!-- TODO: add -->
-<!-- ![proposes](docs/assets/) -->
 
-Для подробностей см. исследование по теме
-<!-- ![research](docs/research.pdf) -->
-
-# Run
+<!-- # Run
 ## Native
 ### ML
-python main.py
+after MVP -->
+<!-- python main.py -->
 
-## Docker
+<!-- ## Docker
 ### Build
-docker build
+after MVP -->
+<!-- docker build -->
 
-### Run
-docker run
+<!-- ### Run
+after MVP -->
+<!-- docker run -->
 
-# Using datasets
+<!-- # Using datasets -->
 <!-- TODO: -->
 
-# Weights, link
+<!-- # Weights, link
+after MVP -->
 <!-- TODO: -->
 
-# Acknowledge
+<!-- # Acknowledge -->
