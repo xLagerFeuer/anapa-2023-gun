@@ -9,7 +9,14 @@ body {
     display: flex;
     flex-direction: column;
 }
-.canvas canvas {
+.canvas {
+    margin: 0 auto;
     width: 80%;
+    height: 60%;
+}
+.canvas canvas {
     height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

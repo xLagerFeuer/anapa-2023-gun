@@ -35,7 +35,7 @@ export const EventLogList = ({label}: IEventLogProps) => {
     ]
     return (
         <div className={cn(
-            "flex flex-col absolute bottom-0 right-0",
+            "flex flex-col absolute z-20 bottom-0 right-0",
             {}
         )}>
             <div
