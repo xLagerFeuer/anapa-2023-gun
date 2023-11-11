@@ -1,15 +1,17 @@
-import {EventLogList, Toolsbar} from "@/components";
+import {EventLogList} from "@/components";
 import {EventLogTypeEnum, SortingTypesEnum} from "@/types";
 import {useEffect, useState} from "react";
 import cn from "classnames";
+// @ts-ignore
 import JSMpeg from "@cycjimmy/jsmpeg-player";
 import {useAppSelector} from "@/store";
 
 const StreamPage = () => {
-    const [sortingType, setSortingType] = useState<SortingTypesEnum | string | null>(localStorage.getItem("sortingType"))
+    const [sortingType] = useState<SortingTypesEnum | string | null>(localStorage.getItem("sortingType"))
     const success = useAppSelector(state => state.stream.isSuccess)
     useEffect(() => {
         if (success) {
+            //@ts-ig
             var firstPlayer = new JSMpeg.VideoElement("#video-canvas-first", "ws://localhost:3001/", {
                 autoplay: true,
             });

@@ -1,9 +1,7 @@
-import {DarkThemeToggle} from "flowbite-react";
 import {SortingButton} from "@/components";
 import {EventLogTypeEnum, SortingTypesEnum} from "@/types";
 import {useState} from "react";
 import StreamModal from "@components/Toolsbar/StreamModal/StreamModal.tsx";
-import VideoModal from "@components/Toolsbar/VideoModal/VideoModal.tsx";
 
 export const Toolsbar = (
     {
@@ -27,10 +25,8 @@ export const Toolsbar = (
                 Тест
             </button>
             {type === EventLogTypeEnum.STREAM
-                ?
+                &&
                 <StreamModal isOpen={isOpen} setIsOpen={setIsOpen}/>
-                :
-                <VideoModal isOpen={isOpen} setIsOpen={setIsOpen}/>
             }
             <SortingButton sortingType={sortingType} setSortingType={setSortingType}/>
         </div>

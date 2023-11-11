@@ -27,6 +27,7 @@ function App() {
     useEffect(() => {
         if (data) {
             let count = 0
+            //@ts-ignore
             data.forEach((item, i) => {
                 if (item.isConfirmed === null) {
                     count += 1;

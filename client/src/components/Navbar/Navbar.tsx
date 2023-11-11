@@ -1,6 +1,6 @@
 import {Link, useLocation} from "react-router-dom";
 import cn from "classnames"
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {Badge, DarkThemeToggle} from "flowbite-react";
 import {IoIosArrowUp} from "react-icons/io";
 import StreamModal from "@components/Toolsbar/StreamModal/StreamModal.tsx";
@@ -47,7 +47,8 @@ export const Navbar = ({count}: { count: number }) => {
                                     <div
                                         className="bg-white dark:bg-bg-navbar border dark:border-gray-400 left-0 w-40 flex flex-col absolute top-16">
                                         <Link className="p-2 dark:hover:bg-bg-tab" to={item.value}>Перейти</Link>
-                                        <p onClick={() => setModalOpen(true)} className="p-2 dark:hover:bg-bg-tab">Загрузка ссылок</p>
+                                        <p onClick={() => setModalOpen(true)}
+                                           className="p-2 dark:hover:bg-bg-tab">Загрузка ссылок</p>
                                     </div>
                                 }
                             </div>

@@ -3,6 +3,7 @@ import {Spinner, Tabs} from "flowbite-react";
 import {useState} from "react";
 import cn from "classnames";
 
+// @ts-ignore
 const EventsPage = ({data}) => {
     const [currentTab, setCurrentTab] = useState(1)
     if (data) {
