@@ -68,7 +68,13 @@ def process_image(image, mode: str):
         case "inference":
             detected, result = pipelines["inference"].consume(image)
             if detected:
-                responce = requests.post()
+                responce = requests.post(
+                    WEB_SOCKET,
+                    {
+                        "result": result,
+
+                    }
+                )
 
 
 # CLI init

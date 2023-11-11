@@ -4,7 +4,7 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     cors: {
-      origin: 'http://localhost:5173', // Replace with your frontend URL
+      origin: 'http://192.168.1.176:5173', // Replace with your frontend URL
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
       credentials: true,
     },

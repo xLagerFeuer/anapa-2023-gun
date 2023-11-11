@@ -26,7 +26,7 @@ class InferencePipeline:
                         id=_id,
                         human_bbox_coord=bbox_coord[_id], wpd_result=wpd_result,
                         wd_bbox_ccord=wd_result["bbox"], wd_result=wd_result
-                    ) # FIXME: отладь wpd_result
+                    ) # FIXME: отладь
                 )
         # TODO: later, after MVP
         # = people_jointer(image_data, )
