@@ -1,4 +1,4 @@
-import {Button} from "flowbite-react";
+import {DarkThemeToggle} from "flowbite-react";
 import {SortingButton} from "@/components";
 import {EventLogTypeEnum, SortingTypesEnum} from "@/types";
 import {useState} from "react";
@@ -17,7 +17,7 @@ export const Toolsbar = (
     }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
     return (
-        <div className="flex flex-grow-0 h-[50px] bg-bg-primary items-center px-10 py-2 gap-4">
+        <div className="flex flex-grow-0 h-[50px] bg-white dark:bg-bg-primary items-center px-10 py-2 gap-4">
             <button
                 onClick={() => setIsOpen(prevState => !prevState)}
                 className="px-10 rounded-md transition duration-300 py-1.5 text-white bg-primary-dark

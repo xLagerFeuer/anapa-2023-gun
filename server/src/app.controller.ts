@@ -1,7 +1,7 @@
 import {Body, Controller, Get, Post} from '@nestjs/common';
 import {AppService} from './app.service';
 import {EventService} from "./events/event.service";
-import {EventsDto} from "./events/events.dto";
+import {EventDto} from "./events/event.dto";
 
 @Controller()
 export class AppController {
@@ -11,7 +11,7 @@ export class AppController {
     }
 
     @Post("test")
-    getHello(@Body("event") event: EventsDto) {
+    getHello(@Body("event") event: EventDto) {
         this.eventService.createEvent(event)
     }
 }

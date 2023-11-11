@@ -5,7 +5,6 @@ import {Server} from "socket.io"
 export class Gateway {
     @WebSocketServer()
     server: Server;
-
     onModuleInit() {
         this.server.on("connection", (socket) => {
             console.log(socket.id)
@@ -17,7 +16,6 @@ export class Gateway {
     @SubscribeMessage('newMessage')
     onNewMessage(@MessageBody() body: any) {
         console.log(body)
-
     }
 
 

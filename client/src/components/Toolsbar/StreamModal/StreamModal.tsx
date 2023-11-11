@@ -11,7 +11,7 @@ const StreamModal = ({isOpen, setIsOpen}: { isOpen: boolean, setIsOpen: (b: bool
     const [mutate] = useSendRtspLinksMutation()
 
     const handleChange = (e: FormEvent<HTMLInputElement>) => {
-        const { name, value } = e.currentTarget;
+        const {name, value} = e.currentTarget;
         setInputValues({
             ...inputValues,
             [name]: value,
@@ -26,10 +26,11 @@ const StreamModal = ({isOpen, setIsOpen}: { isOpen: boolean, setIsOpen: (b: bool
     }
     return (
         <Modal dismissible show={isOpen} onClose={handleOpenModal}>
-            <Modal.Header>Загрузка rtsp ссылок</Modal.Header>
-            <Modal.Body>
+            <Modal.Header className="dark:text-white dark:bg-bg-primary">Загрузка rtsp ссылок</Modal.Header>
+            <Modal.Body className="dark:bg-bg-primary">
                 <form onSubmit={handleForm} className="flex flex-col gap-4">
                     <TextInput
+
                         type="text"
                         name="input1"
                         value={inputValues.input1}
@@ -37,6 +38,7 @@ const StreamModal = ({isOpen, setIsOpen}: { isOpen: boolean, setIsOpen: (b: bool
                         placeholder="rtsp://"
                     />
                     <TextInput
+
                         type="text"
                         name="input2"
                         value={inputValues.input2}
@@ -44,13 +46,21 @@ const StreamModal = ({isOpen, setIsOpen}: { isOpen: boolean, setIsOpen: (b: bool
                         placeholder="rtsp://"
                     />
                     <TextInput
+
                         type="text"
                         name="input3"
                         value={inputValues.input3}
                         onChange={handleChange}
                         placeholder="rtsp://"
                     />
-                    <Button type="submit">Отправить</Button>
+                    <button
+                        type="submit"
+                        className="px-10 rounded-md transition duration-300 py-1.5 text-white bg-primary-dark
+                hover:bg-primary-light
+                active:bg-primary-dark
+                outline-white">
+                        Отправить
+                    </button>
                 </form>
             </Modal.Body>
         </Modal>

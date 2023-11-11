@@ -1,5 +1,4 @@
-import {Body, Controller, Post, UploadedFile, UseInterceptors} from '@nestjs/common';
-import {Gateway} from "../gateway/gateway";
+import {Controller, Post, UploadedFile, UseInterceptors} from '@nestjs/common';
 import {VideoService} from "./video.service";
 import {FileInterceptor} from "@nestjs/platform-express";
 import {diskStorage} from "multer";
@@ -23,7 +22,7 @@ export class VideoController {
             },
         }),
     }))
-    sendFile(@UploadedFile() file: Express.Multer.File) {
-        this.videoService.cutVideo(file)
+    async sendFile(@UploadedFile() file: Express.Multer.File) {
+        return await this.videoService.cutVideo(file)
     }
 }

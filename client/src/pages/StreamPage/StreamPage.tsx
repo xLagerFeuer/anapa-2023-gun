@@ -14,7 +14,7 @@ const StreamPage = () => {
         <>
             {/*@ts-ignore*/}
             <Toolsbar sortingType={sortingType} setSortingType={setSortingType} type={EventLogTypeEnum.STREAM}/>
-            <div className="flex flex-row h-[calc(100vh-106px)] items-end pr-72 bg-bg-primary flex-grow">
+            <div className="flex flex-row h-[calc(100vh-106px)] items-end pr-72 bg-white dark:bg-bg-primary flex-grow">
                 <div className={cn(`flex-1 h-full grid p-8 gap-4`, {
                     ["grid-cols-3"] : sortingType === SortingTypesEnum.GRIDMAX,
                     ["grid-cols-2"] : sortingType === SortingTypesEnum.GRIDHALF,
