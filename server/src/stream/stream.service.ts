@@ -1,56 +1,65 @@
-import {Injectable} from '@nestjs/common';
-import {StreamDto} from "./stream.dto";
-import * as Stream from "node-rtsp-stream"
+import { Injectable } from '@nestjs/common';
+import { StreamDto } from './stream.dto';
+import * as Stream from 'node-rtsp-stream';
+import * as net from 'net';
 
 @Injectable()
 export class StreamService {
-    async setNewStreams(body: StreamDto) {
-        console.log(body)
+    private async findAvailablePort(startingPort: number, maxAttempts: number): Promise<number | null> {
+        let currentPort = startingPort;
+
+        for (let attempt = 0; attempt < maxAttempts; attempt++) {
+            if (await this.isPortAvailable(currentPort)) {
+                return currentPort;
+            }
+            currentPort++;
+        }
+        return null; // если не удалось найти доступный порт
+    }
+
+    private async isPortAvailable(port: number): Promise<boolean> {
+        return new Promise<boolean>((resolve) => {
+            const tester = net.createServer()
+                .once('error', () => resolve(false))
+                .once('listening', () => tester.once('close', () => resolve(true)).close())
+                .listen(port);
+        });
+    }
+
+    async setNewStreams(body: StreamDto): Promise<number | null> {
+        const startingPort = 3001;
+        const maxAttempts = 100; // или любое другое разумное максимальное количество попыток
+
+        const availablePort = await this.findAvailablePort(startingPort, maxAttempts);
+
+        if (availablePort === null) {
+            console.error('Could not find an available port.');
+            return null;
+        }
+
         const optionsFirst = {
             name: 'first',
             streamUrl: body.firstUrl,
-            wsPort: 3001,
+            wsPort: availablePort,
             ffmpegOptions: {
                 '-stats': '',
                 '-r': 30,
-                '-rtsp_transport': 'tcp'  // Добавьте эту опцию
-            }
+                '-rtsp_transport': 'tcp',
+            },
         };
-        // Поскольку потоковое вещание сильно грузит бек было решено пока что остановится на 1 стриме
-        // const optionsSecond = {
-        //     name: 'second',
-        //     streamUrl: body.secondUrl,
-        //     wsPort: 3002,
-        //     ffmpegOptions: {
-        //         '-stats': '',
-        //         '-r': 30
-        //     }
-        // };
-        // const optionsThird = {
-        //     name: 'third',
-        //     streamUrl: body.thirdUrl,
-        //     wsPort: 3003,
-        //     ffmpegOptions: {
-        //         '-stats': '',
-        //         '-r': 30
-        //     }
-        // };
 
         const myStreamFirst = new Stream(optionsFirst);
-        // const myStreamSecond = new Stream(optionsSecond);
-        // const myStreamThird = new Stream(optionsThird);
 
         myStreamFirst.on('data', (data) => {
             // Handle data if needed
             console.log('Received data:', data);
         });
-        // myStreamSecond.on('data', (data) => {
-        //     // Handle data if needed
-        //     console.log('Received data:', data);
-        // });
-        // myStreamThird.on('data', (data) => {
-        //     // Handle data if needed
-        //     console.log('Received data:', data);
-        // });
+        myStreamFirst.on("disconnect", (some) => {
+            console.log(some)
+            console.log("disconnect")
+            myStreamFirst.stop(); // Останавливает стрим
+        })
+
+        return availablePort;
     }
 }

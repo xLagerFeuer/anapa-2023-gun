@@ -9,6 +9,6 @@ export class StreamController {
     }
     @Post("/new")
     async setNewStreams(@Body() body: StreamDto) {
-        await this.streamService.setNewStreams(body)
+        return await this.streamService.setNewStreams(body)
     }
 }

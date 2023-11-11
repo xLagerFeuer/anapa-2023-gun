@@ -5,13 +5,15 @@ interface IInitialState {
     secondUrl: string
     thirdUrl: string
     isSuccess: boolean
+    port: null | number
 }
 
 const initialState: IInitialState = {
     firstUrl: "",
     secondUrl: "",
     thirdUrl: "",
-    isSuccess: false
+    isSuccess: false,
+    port: null
 }
 const streamSlice = createSlice({
     name: "stream",
@@ -24,8 +26,11 @@ const streamSlice = createSlice({
         },
         setSuccess: (state) => {
           state.isSuccess = true
+        },
+        setPort: (state, action) => {
+            state.port = action.payload.port
         }
     }
 })
-export const { setStreams, setSuccess } = streamSlice.actions
+export const { setStreams, setSuccess, setPort } = streamSlice.actions
 export default streamSlice.reducer
