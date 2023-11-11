@@ -70,7 +70,7 @@ class HumanPoseDetection:
         output = self.scale_pose_output(output, resized_shape, img.shape[0:2])
         return output
 
-    def run_test(self, image_path='many_people.jpeg'):
+    def run_test(self, image_path='test.jpeg'):
         img = cv2.cvtColor(cv2.imread(image_path), cv2.COLOR_BGR2RGB)
         pred = self.make_pose_prediction(self.model, img)
         self.plot_pose_prediction(img, pred, show_bbox=True)
