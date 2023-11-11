@@ -3,36 +3,11 @@ import {useState} from "react";
 import cn from "classnames";
 import EventLogItem from "./EventLogItem/EventLogItem.tsx";
 import {IoIosArrowUp} from "react-icons/io";
+import {useGetAllEventsQuery} from "@/store/services/eventsApi.ts";
 
 export const EventLogList = ({label}: IEventLogProps) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
-    const obj = [
-        {
-            img: "none",
-            text: "text 1"
-        },
-        {
-            img: "none",
-            text: "text 2"
-        },
-        {
-            img: "none",
-            text: "text 1"
-        },
-        {
-            img: "none",
-            text: "text 2"
-        },
-        {
-            img: "none",
-            text: "text 1"
-        },
-        {
-            img: "none",
-            text: "text 2"
-        },
-
-    ]
+    const {data} = useGetAllEventsQuery(null)
     return (
         <div className={cn(
             "flex flex-col absolute z-20 bottom-0 right-0",
@@ -52,18 +27,21 @@ export const EventLogList = ({label}: IEventLogProps) => {
                     ["rotate-180"]: isOpen
                 })}/>
             </div>
-            <div
-                className={cn(
-                    "bg-gray-400 p-2 transition min-h-[50vh]",
-                    {
-                        ["block"]: isOpen,
-                        ["hidden"]: !isOpen
-                    })}
-            >
-                {obj.map((item, i) => (
-                    <EventLogItem key={i} imgLink={item.img} text={item.text}/>
-                ))}
-            </div>
+            {data &&
+                <div
+                    className={cn(
+                        "bg-gray-400 p-2 transition min-h-[50vh]",
+                        {
+                            ["block"]: isOpen,
+                            ["hidden"]: !isOpen
+                        })}
+                >
+                    {/*@ts-ignore*/}
+                    {data.map((item, i) => (
+                        <EventLogItem key={i} data={data[i]}/>
+                    ))}
+                </div>
+            }
         </div>
     );
 };

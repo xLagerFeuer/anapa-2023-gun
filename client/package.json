@@ -14,6 +14,7 @@
     "@reduxjs/toolkit": "^1.9.7",
     "@types/react-router-dom": "^5.3.3",
     "classnames": "^2.3.2",
+    "dayjs": "^1.11.10",
     "flowbite-react": "^0.6.4",
     "moment": "^2.29.4",
     "node-rtsp-stream": "^0.0.9",

@@ -9,10 +9,11 @@ import {useAppSelector} from "@/store";
 const StreamPage = () => {
     const [sortingType] = useState<SortingTypesEnum | string | null>(localStorage.getItem("sortingType"))
     const success = useAppSelector(state => state.stream.isSuccess)
+    const PORT = useAppSelector(state => state.stream.port)
     useEffect(() => {
         if (success) {
             //@ts-ig
-            var firstPlayer = new JSMpeg.VideoElement("#video-canvas-first", "ws://localhost:3001/", {
+            var firstPlayer = new JSMpeg.VideoElement("#video-canvas-first", `ws://localhost:${PORT}/`, {
                 autoplay: true,
             });
             // var secondPlayer = new JSMpeg.VideoElement("#video-canvas-second", "ws://localhost:3002/", {
